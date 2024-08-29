@@ -42,9 +42,7 @@
         document.querySelector('a-text', () => {
             document.getElementById('loader').style.display = 'none';
         });
-        document.querySelector('a-text', () => {
-            document.getElementById('click').style.display = 'block';
-        });
+        document.querySelector('a-text').document.addEventListener('click').style.display = 'block';
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loader').style.display = 'none';
         });
