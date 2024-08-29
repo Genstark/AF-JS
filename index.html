@@ -29,7 +29,7 @@
 
         <!-- Adding a box to the scene -->
         <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
-        
+
         <!-- Your AR content -->
         <a-marker type="nft">
             <a-entity scale="5 5 5" position="150 300 -100"></a-entity>
@@ -44,9 +44,13 @@
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loader').style.display = 'none';
         });
-        function autoCall(){
+        function autoCall() {
             let scene = document.querySelector('a-box');
             scene.object3D.rotation.x += 0.1;
+            scene.setAttribute('gps-entity-place', {
+                latitude: 30.5264,
+                longitude: 42.2563
+            });
         }
         setInterval(autoCall, 100);
     </script>
