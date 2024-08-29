@@ -30,13 +30,14 @@
         <!-- Adding a box to the scene -->
         <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
 
-        <!-- Your AR content -->
-        <a-marker type="nft">
+        <a-camera rotation-reader
+            gps-camera="simulateLatitude: 44.50437; simulateLongitude: 11.30106; gpsMinDistance: 10;">
+        </a-camera>
+
+        <!-- <a-marker type="nft">
             <a-entity scale="5 5 5" position="150 300 -100"></a-entity>
         </a-marker>
-
-        <!-- Camera entity -->
-        <a-entity camera></a-entity>
+        <a-entity camera></a-entity> -->
     </a-scene>
 
     <script>
