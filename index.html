@@ -25,7 +25,7 @@
     </div>
 
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;" loaded="onSceneLoaded">
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
         <!-- Adding a box to the scene -->
         <a-box position="0 1.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
@@ -44,6 +44,11 @@
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loader').style.display = 'none';
         });
+        function autoCall(){
+            let scene = document.querySelector('a-box');
+            scene.object3D.rotation.x += 0.1;
+        }
+        setInterval(autoCall, 100);
     </script>
 </body>
 
