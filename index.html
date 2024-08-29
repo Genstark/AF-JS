@@ -28,22 +28,23 @@
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
         <!-- Adding a box to the scene -->
-        <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"
-            gps-entity-place="latitude: 44.50439; longitude: 11.30091;"></a-box>
-            
-            <a-marker type="nft">
-                <a-entity scale="5 5 5" position="150 300 -100"></a-entity>
-            </a-marker>
-            
-            <a-entity camera>
-                <a-camera rotation-reader
-                    gps-camera="simulateLatitude: 44.50437; simulateLongitude: 11.30106; gpsMinDistance: 10;">
-                </a-camera>
-            </a-entity>
+        <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
+        <a-text id="dynamic-text" value="Hello, AR!" position="0 1 -2" color="#FF0000" align="center" width="1"></a-text>
+
+        <a-marker type="nft">
+            <a-entity scale="5 5 5" position="150 300 -100"></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
 
     <script>
         // Example script to hide the loader when the scene is loaded
+        document.querySelector('a-text', () => {
+            document.getElementById('loader').style.display = 'none';
+        });
+        document.querySelector('a-text', () => {
+            document.getElementById('click').style.display = 'block';
+        });
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loader').style.display = 'none';
         });
