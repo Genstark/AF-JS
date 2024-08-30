@@ -31,6 +31,12 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
+        <a-assets>
+            <a-asset-item id="apple-obj" src="./image/bugatti.obj"></a-asset-item>
+            <a-asset-item id="apple-mtl" src="./image/bugatti.mtl"></a-asset-item>
+        </a-assets>
+
+        <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
 
         <a-marker preset="hiro">
             <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
