@@ -31,11 +31,11 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
-        <!-- <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box> -->
-
+        
         <a-marker preset="hiro">
-            <a-entity obj-model="obj: url(image/bugatti.obj); mtl: url(image/bugatti.mtl)" position="0 0 0" scale="1 1 1">
-            </a-entity>
+            <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
+            <!-- <a-entity obj-model="obj: url(image/bugatti.obj); mtl: url(image/bugatti.mtl)" position="0 0 0" scale="1 1 1">
+            </a-entity> -->
         </a-marker>
 
 
@@ -44,7 +44,7 @@
         </a-marker> -->
 
 
-        <a-entity camera></a-entity>
+        <!-- <a-entity camera></a-entity> -->
 
 
         <!-- <a-marker preset='custom' url='rocket.patt'> 
