@@ -49,11 +49,6 @@
         function autoCall() {
             let scene = document.querySelector('a-box');
             scene.object3D.rotation.x += 0.1;
-            scene.setAttribute('gps-entity-place', {
-                latitude: 30.5264,
-                longitude: 42.2563
-            });
-            scene.components["gps-entity-place"]._updatePosition();
         }
         setInterval(autoCall, 100);
     </script>

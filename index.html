@@ -41,6 +41,17 @@
                     <a-box position='0 0.5 0' material='color: red;'></a-box>
                 </a-marker> -->
     </a-scene>
+
+    <script>
+        document.querySelector('a-scene').addEventListener('loaded', function () {
+            document.getElementById('loader').style.display = 'none';
+        });
+        function autoCall() {
+            let scene = document.querySelector('a-box');
+            scene.object3D.rotation.x += 0.1;
+        }
+        setInterval(autoCall, 100);
+    </script>
 </body>
 
 </html>
