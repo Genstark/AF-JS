@@ -8,13 +8,38 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <style>
+        /* Add some basic styling for the loader */
+        .arjs-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 
 <body style="margin: 0; overflow: hidden;">
-    <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-        <a-box look-at="[gps-camera]" scale="150 150 150"
-            gps-entity-place="latitude: 44.4908615; longitude: 11.3326416;"></a-box>
-        <a-camera gps-camera rotation-reader></a-camera>
+    <div class="arjs-loader" id="loader">
+        <div>Loading, please wait...</div>
+    </div>
+
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+        <!-- Adding a box to the scene -->
+        <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
+
+        <a-marker type="nft">
+            <a-entity scale="5 5 5" position="150 300 -100"></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+        <!-- <a-marker preset='custom' url='rocket.patt'> 
+                    <a-box position='0 0.5 0' material='color: red;'></a-box>
+                </a-marker> -->
     </a-scene>
 </body>
 
