@@ -61,7 +61,7 @@
         <a-sphere color="#E75A87" radius="0.4" position="0.2 0.4 -3.5" opacity="0.8"></a-sphere>
 
 
-        <a-entity camera></a-entity>
+        <!-- <a-entity camera></a-entity> -->
         <a-camera gps-camera rotation-reader></a-camera>
 
         <!-- <a-marker preset='custom' url='./image/pattern-desk.png'></a-marker> -->
@@ -73,7 +73,6 @@
                 document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`)
             });
         };
-
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loader').style.display = 'none';
         });
