@@ -58,7 +58,7 @@
         </a-marker> -->
 
         <a-plane position="0 0 -5" color="lightgreen" rotation="-90 0 0" scale="4 4 4"></a-plane>
-        <a-sphere color="#E75A87" radius="0.4" position="0.2 0.4 -3.5" opacity="0.8"></a-sphere>
+        <a-sphere color="#E75A87" radius="0.4" position="0.2 0.4 -3.5" opacity="0.8" id="sphere"></a-sphere>
 
         <a-text value="No markers around" look-at="[gps-camera]" scale="5 5 5"></a-text>
 
@@ -82,6 +82,10 @@
             scene.object3D.rotation.x += 0.1;
         }
         setInterval(autoCall, 100);
+        document.getElementById('sphere').addEventListener('click', () => {
+            let sphere = document.getElementById('sphere');
+            sphere.object3D.color = 'red';
+        });
     </script>
 </body>
 
