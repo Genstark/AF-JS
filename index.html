@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>GeoAR.js demo</title>
+    <title>Geoar demo</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -36,6 +36,9 @@
             <a-asset-item id="apple-mtl" src="./image/bugatti.mtl"></a-asset-item>
             <a-asset-item id="magnemite" src="./image/magnemite/scene.gltf"></a-asset-item>
         </a-assets>
+
+        <a-sky color="#001337">
+        </a-sky>
 
         <a-box position="0 0 -3" rotation="0 45 0" color="#4CC3D9" width="0.3" height="0.3" depth="1"></a-box>
 
@@ -71,7 +74,7 @@
     <script>
         window.onload = () => {
             navigator.geolocation.getCurrentPosition((position) => {
-                document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`)
+                document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`);
             });
         };
         document.querySelector('a-scene').addEventListener('loaded', function () {
@@ -82,8 +85,8 @@
             scene.object3D.rotation.x += 0.1;
         }
         setInterval(autoCall, 100);
-        document.getElementById('sphere').addEventListener('click', () => {
-            let sphere = document.getElementById('sphere');
+        document.querySelector('a-sphere').addEventListener('click', () => {
+            let sphere = document.querySelector('a-sphere');
             sphere.object3D.color = 'red';
         });
     </script>
