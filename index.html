@@ -63,11 +63,11 @@
     </a-scene>
 
     <script>
-        window.onload = () => {
-            navigator.geolocation.getCurrentPosition((position) => {
-                document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`);
-            });
-        };
+        // window.onload = () => {
+        //     navigator.geolocation.getCurrentPosition((position) => {
+        //         document.querySelector('a-text').setAttribute('gps-entity-place', `latitude: ${position.coords.latitude}; longitude: ${position.coords.longitude};`);
+        //     });
+        // };
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.getElementById('loader').style.display = 'none';
         });
@@ -78,7 +78,7 @@
         setInterval(autoCall, 100);
         document.querySelector('a-sphere').addEventListener('click', () => {
             let sphere = document.querySelector('a-sphere');
-            sphere.setAttribute('color', 'red');
+            sphere.setAttribute('material', 'color', 'red');
         });
     </script>
 </body>
