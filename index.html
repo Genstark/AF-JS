@@ -36,12 +36,11 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
-        <a-marker type="pattern" patternURL="./image/pattern-desk.patt" smooth="true">
-            [[-0.5,-0.5,0],[0.5,-0.5,0],[0.5,0.5,0],[-0.5,0.5,0]]
-            [-0.40859150943396225,-0.40859150943396225,0.0]
-            [0.40859150943396225,-0.40859150943396225,0.0]
-            [0.40859150943396225,0.40859150943396225,0.0]
-            [-0.40859150943396225,0.40859150943396225,0.0]
+        <a-assets>
+            <img id="custom-hiro" src="./image/pattern-desk.png">
+        </a-assets>
+
+        <a-marker type="image" url="#custom-hiro" smooth="true">
             <a-box position="0 0.5 0" material="color: red;" scale="0.5 0.5 0.5"></a-box>
         </a-marker>
 
