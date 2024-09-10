@@ -37,11 +37,12 @@
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <a-assets>
-            <img id="custom-hiro" src="./image/pattern-desk.png">
+            <a-asset-item id="custom-marker" src="./image/pattern-desk.png"></a-assets-item>
+            <img id="custom-box-image" src="./image/pattern-desk.png">
         </a-assets>
 
-        <a-marker preset="hiro" smooth="true">
-            <a-box id="box-1" position="0 0 0" material="color: red;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-hiro"></a-box>
+        <a-marker preset="nft" url="#custom-marker" smooth="true">
+            <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box>
         </a-marker>
 
         <a-entity camera></a-entity>
@@ -54,7 +55,7 @@
         function rotation(){
             box1.object3D.rotation.x += 0.1;
             box1.object3D.rotation.y += 0.1;
-            box1.object3D.rotation.z += 0.1;
+            // box1.object3D.rotation.z += 0.1;
         }
         setInterval(rotation, 100);
     </script>
