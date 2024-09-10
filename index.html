@@ -20,6 +20,7 @@
             color: #fff;
             padding: 10px;
             border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -74,7 +75,7 @@
             let scene = document.querySelector('a-box');
             scene.object3D.rotation.x += 0.1;
         }
-        setInterval(autoCall, 100);
+        setInterval(autoCall, 1);
         document.querySelector('a-sphere').addEventListener('click', () => {
             let sphere = document.querySelector('a-sphere');
             sphere.setAttribute('material', 'color', 'red');
