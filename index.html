@@ -40,12 +40,16 @@
             <a-asset-item id="my-model" src="./image/magnemite/scene.gltf"></a-asset-item>
             <a-asset-item id="custom-marker" src="./image/pattern-desk.png"></a-assets-item>
             <img id="custom-box-image" src="./image/pattern-desk.png">
+            <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
+            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item>
         </a-assets>
 
         <a-marker preset="hiro" smooth="true">
             <!-- <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box> -->
-            <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity>
+            <!-- <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity> -->
+            <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
         </a-marker>
+
 
         <a-entity camera></a-entity>
         <!-- <a-light type="ambient" color="#FFF"></a-light> -->
