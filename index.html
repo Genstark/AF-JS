@@ -39,12 +39,13 @@
         <a-assets>
             <a-asset-item id="my-model" src="./image/magnemite/scene.gltf"></a-asset-item>
             <a-asset-item id="custom-marker" src="./image/pattern-desk.png"></a-assets-item>
-            <img id="custom-box-image" src="./image/pattern-desk.png">
-            <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
-            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item>
+                <a-asset-item id="custom-patt" src="./image/pattern-desk.patt"></a-asset-item>
+                <img id="custom-box-image" src="./image/pattern-desk.png">
+                <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
+                <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item>
         </a-assets>
 
-        <a-marker-camera preset="custom" url="#custom-image" smooth="true">
+        <a-marker-camera preset="custom" url="#custom-patt" smooth="true">
             <!-- <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box> -->
             <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity>
             <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity> -->
@@ -56,6 +57,9 @@
     </a-scene>
 
     <script>
+        document.querySelector('a-scene').addEventListener('loaded', function () {
+            document.getElementById('.js-loader').style.display = 'none';
+        });
         let box1 = document.getElementById('box-1');
         function rotation() {
             box1.object3D.rotation.x += 0.1;
