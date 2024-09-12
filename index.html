@@ -8,6 +8,7 @@
     <!-- import aframe and then ar.js with image tracking / location based features -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 
     <!-- style for the loader -->
     <style>
@@ -45,7 +46,7 @@
             <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
         </a-assets>
 
-        <a-marker type="pattern" patternUrl="#custom-patt" smooth="true">
+        <a-marker type="pattern" patternurl="#custom-patt" smooth="true">
             <!-- <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box> -->
             <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity>
             <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity> -->
