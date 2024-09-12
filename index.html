@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Image based AF demo</title>
+    <title>Image based demo</title>
     <!-- import aframe and then ar.js with image tracking / location based features -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -41,15 +41,17 @@
             <a-asset-item id="custom-marker" src="./image/pattern-desk.png"></a-assets-item>
             <a-asset-item id="custom-patt" src="./image/pattern-desk.patt"></a-asset-item>
             <img id="custom-box-image" src="./image/pattern-desk.png">
-            <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
-            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item>
+            <!-- <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
+            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
         </a-assets>
 
-        <a-marker preset="custom" type="pattern" url="#custom-patt" smooth="true">
-            <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box>
+        <a-marker type="pattern" patternUrl="#custom-patt" smooth="true">
+            <!-- <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box> -->
             <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity>
-            <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
+            <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity> -->
         </a-marker>
+
+        <a-box position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4"></a-box>
 
         <a-entity camera></a-entity>
         <!-- <a-light type="ambient" color="#FFF"></a-light> -->
