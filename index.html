@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Image based tracking AF.js demo</title>
+    <title>Image based AF demo</title>
     <!-- import aframe and then ar.js with image tracking / location based features -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -44,14 +44,13 @@
             <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item>
         </a-assets>
 
-        <a-marker preset="hiro" smooth="true">
+        <a-marker-camera preset="custom" url="#custom-image" smooth="true">
             <!-- <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box> -->
             <!-- <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity> -->
             <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
-        </a-marker>
+        </a-marker-camera>
 
-
-        <a-entity camera></a-entity>
+        <!-- <a-entity camera></a-entity> -->
         <!-- <a-light type="ambient" color="#FFF"></a-light> -->
 
     </a-scene>
