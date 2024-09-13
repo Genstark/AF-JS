@@ -54,8 +54,11 @@
             <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity> -->
         </a-marker>
 
-        <a-entity id="refresh-button" geometry="primitive: box" material="color: lightgreen" position="0 0 -2"
-            scale="0 0 0">
+        <a-entity id="refresh-button" geometry="primitive: box" material="color: gray" position="0 0 -2"
+            scale="0.1 0.1 0.1" class="clickable" event-set__enter="_event: mouseenter; scale: 0.1 0.1 0.1"
+            event-set__leave="_event: mouseleave; scale: 0.1 0.2 0.1"
+            event-set__click="_event: click; _target: #refresh-button; scale: 0.1 0.1 0.1; color: red">
+            <a-text value="Reset" align="center" position="0 0 0" color="black"></a-text>
         </a-entity>
 
         <a-sphere position="0.5 0.1 0.1" radius="1.25" color="#EF2D5E"></a-sphere>
@@ -75,12 +78,13 @@
             // box1.object3D.rotation.z += 0.1;
         }
         // setInterval(rotation, 100);
-        document.querySelector('#refresh-button').addEventListener('hover', () => {
+        document.querySelector('#refresh-button').addEventListener('click', () => {
             console.log('click');
         });
         function s() {
             const sphere = document.querySelector("a-sphere");
             sphere.setAttribute("color", "red");
+            console.log('click');
         }
     </script>
 

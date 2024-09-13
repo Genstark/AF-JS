@@ -44,7 +44,7 @@ const router = createRouter({
 			path: '/ThreeModel',
 			name: 'ThreeDModel',
 			component: ThreeModel
-		}
+		},
 	]
 });
 

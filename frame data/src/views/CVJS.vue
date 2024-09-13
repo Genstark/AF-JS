@@ -3,11 +3,13 @@
     <input type="file" @input="userimage">
     <!-- <br> -->
     <!-- <canvas ref="canvas"></canvas> -->
-    <ARComponent />
+    <!-- <ARComponent /> -->
+    <CustomMarker />
 </template>
 
 <script setup>
-import ARComponent from '@/components/ARComponent.vue';
+// import ARComponent from '@/components/ARComponent.vue';
+import CustomMarker from '@/components/CustomMarker.vue';
 // import CV from '@techstark/opencv-js';
 // import io from 'socket.io-client';
 // import 'aframe';

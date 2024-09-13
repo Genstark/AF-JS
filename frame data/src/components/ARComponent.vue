@@ -1,25 +1,38 @@
-<!-- src/components/ARScene.vue -->
 <template>
-    <!-- AR.js scene -->
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
-        <!-- Loader shown until image descriptors are loaded -->
+        <a-assets>
+            <img id="chemical" src="../image/chemical.png">
+            <img id="pencil" src="../image/pencil.png">
+            <a-asset-item id="obj" src="../image/bug.obj"></a-asset-item>
+            <a-asset-item id="mtl" src="../image/but.mtl"></a-asset-item>
+            <a-asset-item id="out-source"
+                src="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf">
+            </a-asset-item>
+        </a-assets>
+
         <div class="arjs-loader" v-show="loading">
             <div>Loading, please wait...</div>
         </div>
 
-        <!-- Adding a box to the scene -->
         <a-box position="0 1.5 -3" rotation="0 45 0" color="#4CC3D9" ref="box">
         </a-box>
 
-        <!-- Your AR content -->
+        <a-entity
+            gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+            scale="5 5 5" position="100 100 0">
+        </a-entity>
+
         <a-marker type="nft">
             <a-entity scale="5 5 5" position="150 300 -100">
             </a-entity>
         </a-marker>
 
-        <!-- Camera entity -->
+        <a-marker preset='custom' type='pattern' url='https://raw.githubusercontent.com/TimVanMourik/Armadillo/master/app/armadillo/static/img/patt/pattern-marker.patt'>
+            <a-entity collada-model="#tree-model"></a-entity>
+        </a-marker>
+
         <a-entity camera></a-entity>
     </a-scene>
 </template>
@@ -39,16 +52,17 @@ onMounted(() => {
 });
 
 // eslint-disable-next-line no-unused-vars
-function moving() {
+function changing() {
     box.value.object3D.rotation.x += 0.1;
-    // box.value.object3D.rotation.y += 0.1;
-    // box.value.object3D.rotation.z += 0.1;
+    box.value.object3D.rotation.y += 0.1;
 }
 
-setInterval(moving, 50);
+setInterval(changing, 50);
 
-// const nftUrl = ref("https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex");
-// const gltfModelUrl = ref("https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf");
+// eslint-disable-next-line no-unused-vars
+const nftUrl = ref("https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex");
+// eslint-disable-next-line no-unused-vars
+const gltfModelUrl = ref("https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf");
 
 // const loading = ref(true);
 
