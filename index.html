@@ -34,15 +34,17 @@
         <div>Loading, please wait...</div>
     </div>
 
+    <button style="z-index: 999; position: fixed" onclick="s()">RESIZE</button>
+
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <a-assets>
             <a-asset-item id="my-model" src="./image/magnemite/scene.gltf"></a-asset-item>
             <a-asset-item id="custom-marker" src="./image/pattern-desk.png"></a-assets-item>
-            <a-asset-item id="custom-patt" src="./image/pattern-desk.patt"></a-asset-item>
-            <img id="custom-box-image" src="./image/pattern-desk.png">
-            <!-- <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
+                <a-asset-item id="custom-patt" src="./image/pattern-desk.patt"></a-asset-item>
+                <img id="custom-box-image" src="./image/pattern-desk.png">
+                <!-- <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
             <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
         </a-assets>
 
@@ -52,11 +54,14 @@
             <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity> -->
         </a-marker>
 
-        <a-box position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4"></a-box>
+        <a-entity id="refresh-button" geometry="primitive: box" material="color: lightgreen" position="0 0 -2"
+            scale="0 0 0">
+        </a-entity>
+
+        <a-sphere position="0.5 0.1 0.1" radius="1.25" color="#EF2D5E"></a-sphere>
 
         <a-entity camera></a-entity>
         <!-- <a-light type="ambient" color="#FFF"></a-light> -->
-
     </a-scene>
 
     <script>
@@ -70,6 +75,13 @@
             // box1.object3D.rotation.z += 0.1;
         }
         // setInterval(rotation, 100);
+        document.querySelector('#refresh-button').addEventListener('hover', () => {
+            console.log('click');
+        });
+        function s() {
+            const sphere = document.querySelector("a-sphere");
+            sphere.setAttribute("color", "red");
+        }
     </script>
 
 </body>
