@@ -1,184 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WebXR AR Example</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Image based demo</title>
+    <!-- import aframe and then ar.js with image tracking / location based features -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
 
-        canvas {
-            display: block;
+    <!-- style for the loader -->
+    <style>
+        .js-loader {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
         }
     </style>
-    <!-- Include glMatrix library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.4.0/gl-matrix.js"></script>
 </head>
 
-<body>
-    <canvas id="webxr-canvas"></canvas>
+<body style="margin : 0px; overflow: hidden;">
+    <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+    <div class="js-loader">
+        <div>Loading, please wait...</div>
+    </div>
+
+    <button style="z-index: 999; position: fixed" onclick="s()">RESIZE</button>
+
+    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+
+        <a-assets>
+            <a-asset-item id="my-model" src="./image/magnemite/scene.gltf"></a-asset-item>
+            <a-asset-item id="custom-marker" src="./image/pattern-desk.png"></a-assets-item>
+                <a-asset-item id="custom-patt" src="./image/pattern-desk.patt"></a-asset-item>
+                <img id="custom-box-image" src="./image/pattern-desk.png">
+                <!-- <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
+            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
+        </a-assets>
+
+        <a-marker type="pattern" patternurl="#custom-patt" smooth="true">
+            <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" src="#custom-box-image"></a-box>
+            <!-- <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 1 0"></a-entity> -->
+            <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.1 0.1 0.1" position="0 0 0"></a-entity> -->
+        </a-marker>
+        
+
+        <a-entity camera></a-entity>
+        <!-- <a-light type="ambient" color="#FFF"></a-light> -->
+    </a-scene>
+
     <script>
-        let xrSession = null;
-        let gl = null;
-        let program = null;
-        let vertexBuffer = null;
-        let referenceSpace = null;
-        let hitTestSource = null;
-
-        let positionLocation, mvpLocation;
-
-        async function init() {
-            const canvas = document.getElementById('webxr-canvas');
-            gl = canvas.getContext('webgl', { xrCompatible: true });
-
-            if (!gl) {
-                console.error('WebGL not supported');
-                return;
-            }
-
-            // Define shaders and program
-            const vertexShaderSource = `
-                attribute vec4 a_position;
-                uniform mat4 u_modelViewProjection;
-                void main() {
-                    gl_Position = u_modelViewProjection * a_position;
-                }
-            `;
-
-            const fragmentShaderSource = `
-                void main() {
-                    gl_FragColor = vec4(1, 0, 0, 1);
-                }
-            `;
-
-            const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
-            const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-            program = createProgram(gl, vertexShader, fragmentShader);
-
-            positionLocation = gl.getAttribLocation(program, 'a_position');
-            mvpLocation = gl.getUniformLocation(program, 'u_modelViewProjection');
-
-            const vertices = new Float32Array([
-                -0.5, -0.5, -0.5,
-                0.5, -0.5, -0.5,
-                0.5, 0.5, -0.5,
-                -0.5, 0.5, -0.5,
-                -0.5, -0.5, 0.5,
-                0.5, -0.5, 0.5,
-                0.5, 0.5, 0.5,
-                -0.5, 0.5, 0.5,
-            ]);
-
-            vertexBuffer = gl.createBuffer();
-            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-
-            const xrButton = document.createElement('button');
-            xrButton.textContent = 'Enter AR';
-            document.body.appendChild(xrButton);
-
-            xrButton.addEventListener('click', async () => {
-                try {
-                    if (navigator.xr && await navigator.xr.isSessionSupported('immersive-ar')) {
-                        const session = await navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'] });
-                        await startAR(session);
-                    } else {
-                        console.error('AR sessions are not supported on this device');
-                    }
-                } catch (e) {
-                    console.error('Failed to start AR session:', e);
-                }
-            });
+        document.querySelector('a-scene').addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.js-loader').style.display = 'none';
+        });
+        let box1 = document.getElementById('box-1');
+        function rotation() {
+            box1.object3D.rotation.x += 0.1;
+            box1.object3D.rotation.y += 0.1;
+            // box1.object3D.rotation.z += 0.1;
         }
-
-        async function startAR(session) {
-            xrSession = session;
-            const canvas = document.getElementById('webxr-canvas');
-            gl = canvas.getContext('webgl', { xrCompatible: true });
-
-            gl.canvas.width = gl.canvas.clientWidth;
-            gl.canvas.height = gl.canvas.clientHeight;
-
-            referenceSpace = await xrSession.requestReferenceSpace('local');
-            hitTestSource = await xrSession.requestHitTestSource({ space: referenceSpace });
-
-            xrSession.updateRenderState({
-                baseLayer: new XRWebGLLayer(xrSession, gl)
-            });
-
-            function onXRFrame(t, frame) {
-                const session = frame.session;
-                const pose = frame.getViewerPose(referenceSpace);
-
-                if (pose) {
-                    gl.clearColor(0.0, 0.0, 0.0, 1.0);
-                    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-                    const hitTestResults = frame.getHitTestResults(hitTestSource);
-                    if (hitTestResults.length > 0) {
-                        const hitPose = hitTestResults[0].getPose(referenceSpace);
-                        if (hitPose) {
-                            const projectionMatrix = pose.views[0].projectionMatrix;
-                            const viewMatrix = hitPose.transform.inverse.matrix;
-                            const modelViewProjectionMatrix = mat4.create();
-
-                            // Compute model-view-projection matrix
-                            mat4.multiply(modelViewProjectionMatrix, projectionMatrix, viewMatrix);
-
-                            gl.useProgram(program);
-                            gl.uniformMatrix4fv(mvpLocation, false, modelViewProjectionMatrix);
-
-                            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-                            gl.enableVertexAttribArray(positionLocation);
-                            gl.vertexAttribPointer(positionLocation, 3, gl.FLOAT, false, 0, 0);
-
-                            gl.drawArrays(gl.TRIANGLES, 0, 36);
-                        }
-                    }
-                }
-
-                xrSession.requestAnimationFrame(onXRFrame);
-            }
-
-            xrSession.requestAnimationFrame(onXRFrame);
-            xrSession.addEventListener('end', () => {
-                xrSession = null;
-                document.querySelector('button').style.display = 'block';
-            });
-
-            document.querySelector('button').style.display = 'none';
+        // setInterval(rotation, 100);
+        document.querySelector('#refresh-button').addEventListener('click', () => {
+            console.log('click');
+        });
+        function s() {
+            const sphere = document.querySelector("a-sphere");
+            sphere.setAttribute("color", "red");
+            console.log('click');
         }
-
-        function createShader(gl, type, source) {
-            const shader = gl.createShader(type);
-            gl.shaderSource(shader, source);
-            gl.compileShader(shader);
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                console.error(gl.getShaderInfoLog(shader));
-                gl.deleteShader(shader);
-                return null;
-            }
-            return shader;
-        }
-
-        function createProgram(gl, vertexShader, fragmentShader) {
-            const program = gl.createProgram();
-            gl.attachShader(program, vertexShader);
-            gl.attachShader(program, fragmentShader);
-            gl.linkProgram(program);
-            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-                console.error(gl.getProgramInfoLog(program));
-                return null;
-            }
-            return program;
-        }
-
-        init();
     </script>
+
 </body>
 
 </html>
