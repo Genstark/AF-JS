@@ -22,10 +22,8 @@
     <script>
         let xrSession = null;
         let gl = null;
-        let cubeRotation = 0;
-        let referenceSpace = null;
-        let hitTestSource = null;
-        let hitTestSourceRequested = false;
+        let program = null;
+        let vertexBuffer = null;
 
         async function init() {
             const canvas = document.getElementById('webxr-canvas');
@@ -53,7 +51,7 @@
 
             const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
             const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
-            const program = createProgram(gl, vertexShader, fragmentShader);
+            program = createProgram(gl, vertexShader, fragmentShader);
 
             const positionLocation = gl.getAttribLocation(program, 'a_position');
             const mvpLocation = gl.getUniformLocation(program, 'u_modelViewProjection');
@@ -69,7 +67,7 @@
                 -0.5, 0.5, 0.5,
             ]);
 
-            const vertexBuffer = gl.createBuffer();
+            vertexBuffer = gl.createBuffer();
             gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
             gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
@@ -79,8 +77,12 @@
 
             xrButton.addEventListener('click', async () => {
                 try {
-                    const session = await navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'] });
-                    await startAR(session);
+                    if (navigator.xr && await navigator.xr.isSessionSupported('immersive-ar')) {
+                        const session = await navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'] });
+                        await startAR(session);
+                    } else {
+                        console.error('AR sessions are not supported on this device');
+                    }
                 } catch (e) {
                     console.error('Failed to start AR session:', e);
                 }
@@ -95,9 +97,8 @@
             gl.canvas.width = gl.canvas.clientWidth;
             gl.canvas.height = gl.canvas.clientHeight;
 
-            referenceSpace = await xrSession.requestReferenceSpace('local');
-            const hitTestSourceInit = { space: referenceSpace };
-            hitTestSource = await xrSession.requestHitTestSource(hitTestSourceInit);
+            const referenceSpace = await xrSession.requestReferenceSpace('local');
+            const hitTestSource = await xrSession.requestHitTestSource({ space: referenceSpace });
 
             xrSession.updateRenderState({
                 baseLayer: new XRWebGLLayer(xrSession, gl)
@@ -106,6 +107,7 @@
             function onXRFrame(t, frame) {
                 const session = frame.session;
                 const pose = frame.getViewerPose(referenceSpace);
+
                 if (pose) {
                     gl.clearColor(0.0, 0.0, 0.0, 1.0);
                     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
