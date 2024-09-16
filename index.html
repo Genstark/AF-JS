@@ -15,6 +15,7 @@
             display: block;
         }
     </style>
+    <!-- Include glMatrix library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.4.0/gl-matrix.js"></script>
 </head>
 
@@ -25,6 +26,10 @@
         let gl = null;
         let program = null;
         let vertexBuffer = null;
+        let referenceSpace = null;
+        let hitTestSource = null;
+
+        let positionLocation, mvpLocation;
 
         async function init() {
             const canvas = document.getElementById('webxr-canvas');
@@ -54,8 +59,8 @@
             const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
             program = createProgram(gl, vertexShader, fragmentShader);
 
-            const positionLocation = gl.getAttribLocation(program, 'a_position');
-            const mvpLocation = gl.getUniformLocation(program, 'u_modelViewProjection');
+            positionLocation = gl.getAttribLocation(program, 'a_position');
+            mvpLocation = gl.getUniformLocation(program, 'u_modelViewProjection');
 
             const vertices = new Float32Array([
                 -0.5, -0.5, -0.5,
@@ -98,8 +103,8 @@
             gl.canvas.width = gl.canvas.clientWidth;
             gl.canvas.height = gl.canvas.clientHeight;
 
-            const referenceSpace = await xrSession.requestReferenceSpace('local');
-            const hitTestSource = await xrSession.requestHitTestSource({ space: referenceSpace });
+            referenceSpace = await xrSession.requestReferenceSpace('local');
+            hitTestSource = await xrSession.requestHitTestSource({ space: referenceSpace });
 
             xrSession.updateRenderState({
                 baseLayer: new XRWebGLLayer(xrSession, gl)
@@ -120,6 +125,8 @@
                             const projectionMatrix = pose.views[0].projectionMatrix;
                             const viewMatrix = hitPose.transform.inverse.matrix;
                             const modelViewProjectionMatrix = mat4.create();
+
+                            // Compute model-view-projection matrix
                             mat4.multiply(modelViewProjectionMatrix, projectionMatrix, viewMatrix);
 
                             gl.useProgram(program);
