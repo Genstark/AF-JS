@@ -3,10 +3,8 @@ AFRAME.registerComponent('markerhandler', {
         const animatedMarker = document.querySelector("#markercube");
         const aEntity = document.querySelector("#box-1");
 
-        // every click, we make our model grow in size :)
-        animatedMarker.addEventListener('click', function (ev, target) {
-            const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
-            console.log('click');
+        animatedMarker.addEventListener('click', () => {
+            console.log('click on cube');
         });
     }
 });
@@ -33,6 +31,19 @@ markercube.addEventListener('markerLost', () => {
     clearInterval(moving);
     markercube.removeEventListener('markerFound', cubemoving);
     markercube.removeEventListener('markerLost', cubemoving);
+});
+
+
+AFRAME.registerComponent('markerhandler1',{
+    init: () => {
+        const animatedMarkerball = document.querySelector("#markerball");
+        const aEntity = document.querySelector("#fireball-1");
+        animatedMarkerball.addEventListener('click', () => {
+            console.log('click on fireball');
+            console.log(aEntity.value);
+        });
+       
+    }
 });
 
 const markerball = document.getElementById('markerball');
