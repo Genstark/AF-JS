@@ -34,25 +34,58 @@
         <div>Loading, please wait...</div>
     </div>
 
-    <button style="z-index: 999; position: fixed" onclick="s()">RESIZE</button>
-
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
-        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;" cursor="rayOrigin:mouse">
 
         <a-assets>
             <a-asset-item id="my-model" src="./image/magnemite/scene.gltf"></a-asset-item>
             <img id="custom-box-image" src="./image/pattern-desk.png">
-            <a-asset id="fireball" src="./image/fireball__energy_sphere/scene.gltf"></a-asset>
-            <!-- <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
-            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
+            <a-asset-item id="fireball" src="./image/fireball-energy-sphere/scene.gltf"></a-asset-item>
+            <a-asset-item id="magnemite" src="./image/magnemite/scene.gltf"></a-asset-item>
+            <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
+            <a-asset-item id="model-2" src="./image/model-2/untitled.gltf"></a-asset-item>
+            <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
+            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item>
         </a-assets>
 
         <a-marker type="pattern" url="./image/pattern-hand.patt" smooth="true">
-            <!-- <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0" url="#custom-box-image"></a-box> -->
-            <a-entity gltf-model="#my-model" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"></a-entity>
-            <!-- <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.01 0.01 0.01" position="0 0 0" rotation="0 0 0"></a-entity> -->
+            <a-entity obj-model="obj: #obj; mtl: #mtl;" scale="0.01 0.01 0.01" position="0 0 0" rotation="0 0 0"
+                id="car"></a-entity>
         </a-marker>
 
+        <a-marker preset="hiro" smooth="true" id="defaultBox">
+            <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0"
+                url="#custom-box-image"></a-box>
+        </a-marker>
+
+        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
+            <a-entity gltf-model="#fireball" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
+                id="fireball-1-1"></a-entity>
+        </a-marker>
+
+        <a-marker type="pattern" url="./image/pattern-pencil.patt" smooth="true">
+            <a-entity gltf-model="#fireball" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
+                id="fireball-1"></a-entity>
+        </a-marker>
+
+        <a-marker type="pattern" url="./image/pattern-hand.patt" smooth="true">
+            <a-entity gltf-model="#magnemite" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
+                id="magnemite-1-1"></a-entity>
+        </a-marker>
+
+        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
+            <a-entity gltf-model="#model-1" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
+                id="model-1-1"></a-entity>
+        </a-marker>
+
+        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
+            <a-entity gltf-model="#model-2" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
+                id="model-2-2"></a-entity>
+        </a-marker>
+
+        <a-image src="./image/user.png" clickhandler="txt:image1"></a-image>
+        <a-box clickhandler="txt:box1"></a-box>
+        <a-entity cursor="rayOrigin:mouse"></a-entity>
 
         <a-entity camera></a-entity>
         <!-- <a-light type="ambient" color="#FFF"></a-light> -->
@@ -77,8 +110,20 @@
             sphere.setAttribute("color", "red");
             console.log('click');
         }
+        AFRAME.registerComponent('clickhandler', {
+            schema: {
+                txt: { default: 'default' }
+            },
+            init: function () {
+                var data = this.data;
+                var el = this.el;
+                el.addEventListener('click', function () {
+                    console.log(data.txt);
+                });
+            }
+        });
     </script>
-
+    <script src="./main.js"></script>
 </body>
 
 </html>
