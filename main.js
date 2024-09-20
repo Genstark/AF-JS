@@ -1,13 +1,3 @@
-AFRAME.registerComponent('markerhandler', {
-    init: function () {
-        const animatedMarker = document.querySelector("#markercube");
-        const aEntity = document.querySelector("#box-1");
-
-        animatedMarker.addEventListener('click', () => {
-            console.log('click on cube');
-        });
-    }
-});
 const markercube = document.getElementById('markercube');
 const box = document.getElementById('box-1');
 let boxMove = false;
@@ -31,19 +21,6 @@ markercube.addEventListener('markerLost', () => {
     clearInterval(moving);
     markercube.removeEventListener('markerFound', cubemoving);
     markercube.removeEventListener('markerLost', cubemoving);
-});
-
-
-AFRAME.registerComponent('markerhandler1',{
-    init: () => {
-        const animatedMarkerball = document.querySelector("#markerball");
-        const aEntity = document.querySelector("#fireball-1");
-        animatedMarkerball.addEventListener('click', () => {
-            console.log('click on fireball');
-            console.log(aEntity.value);
-        });
-       
-    }
 });
 
 const markerball = document.getElementById('markerball');
