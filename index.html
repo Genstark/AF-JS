@@ -48,18 +48,18 @@
             <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
         </a-assets>
 
-        <a-marker preset="hiro" smooth="true" id="markercube" emitevents="true" cursor="rayOrigin: mouse" markerhandler>
+        <a-marker preset="hiro" smooth="true" id="markercube" emitevents="true">
             <a-box id="box-1" position="0 0 0" material="color: lightgreen;" scale="0.4 0.4 0.4" rotating="0 0 0"
                 url="#custom-box-image"></a-box>
         </a-marker>
 
-        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true" id="markerball" markerhandler1>
+        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true" id="markerball">
             <a-entity gltf-model="#fireball" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
                 id="fireball-1">
             </a-entity>
         </a-marker>
 
-        <a-marker type="pattern" url="./image/pattern-hand.patt" smooth="true" id="markermag" markerhandler2>
+        <a-marker type="pattern" url="./image/pattern-hand.patt" smooth="true" id="markermag">
             <a-entity gltf-model="#magnemite" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"
                 id="magnemite-1"></a-entity>
         </a-marker>
