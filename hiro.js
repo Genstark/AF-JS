@@ -19,4 +19,6 @@ function moving(box){
 marker1.addEventListener('markerLost', () => {
     ismodel1 = false;
     clearInterval(moving(ismodel1));
+    marker1.removeEventListener('markerFound', moving);
+    marker1.removeEventListener('markerLost', moving);
 });
