@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image based demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/3.0.0/aframe/build/aframe-ar-nft.js"></script>
-
 
     <style>
         .js-loader {
@@ -28,7 +27,7 @@
     </style>
 </head>
 
-<body style="margin : 0px; overflow: hidden;">
+<body style="margin: 0; overflow: hidden;">
     <div class="js-loader">
         <div>Loading, please wait...</div>
     </div>
@@ -37,17 +36,16 @@
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <a-assets>
-            <a-asset-item id="fireball" src="./image/fireball-energy-sphere/scene.gltf"></a-asset-item>
-            <a-asset-item id="magnemite" src="./image/magnemite/scene.gltf"></a-asset-item>
             <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
-            <a-asset-item id="model-2" src="./image/model-2/untitled.gltf"></a-asset-item>
-            <!-- <a-asset-item id="obj" src="./image/bugatti.obj"></a-asset-item>
-            <a-asset-item id="mtl" src="./image/bugatti.mtl"></a-asset-item> -->
         </a-assets>
 
         <a-nft type="nft" url="./image/desk" smooth="true">
             <a-entity gltf-model="#model-1" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"></a-entity>
         </a-nft>
+
+        <a-marker type="pattern" url="./image/pattern-desk.png" smooth="true">
+            <a-entity gltf-model="#model-1" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"></a-entity>
+        </a-marker>
 
         <a-entity camera></a-entity>
     </a-scene>
@@ -63,18 +61,7 @@
             // box1.object3D.rotation.z += 0.1;
         }
         // setInterval(rotation, 100);
-
-        const fireballEntity = document.getElementById('fireballEntity');
-
-        fireballEntity.addEventListener('model-loaded', () => {
-            console.log('Model loaded successfully!');
-        });
-
-        fireballEntity.addEventListener('model-error', () => {
-            console.error('Error loading model.');
-        });
     </script>
-    <!-- <script src="./hiro.js"></script> -->
 </body>
 
 </html>
