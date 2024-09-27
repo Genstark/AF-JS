@@ -27,8 +27,8 @@
 import { signals } from 'signals';
 import { onMounted } from 'vue';
 import 'aframe';
-import 'aframe-ar';
-// import 'ar.js/aframe/build/aframe-ar.js';
+// import 'aframe-ar';
+import 'ar.js/aframe/build/aframe-ar.js';
 
 onMounted(async () => {
     const api = 'https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf';

@@ -3,12 +3,12 @@
     <input type="file" @input="userimage">
     <!-- <br> -->
     <!-- <canvas ref="canvas"></canvas> -->
-    <!-- <ARComponent /> -->
+    <!-- <ReadComponent /> -->
     <CustomMarker />
 </template>
 
 <script setup>
-// import ARComponent from '@/components/ARComponent.vue';
+// import ReadComponent from '@/components/ReadComponent.vue';
 import CustomMarker from '@/components/CustomMarker.vue';
 // import CV from '@techstark/opencv-js';
 // import io from 'socket.io-client';

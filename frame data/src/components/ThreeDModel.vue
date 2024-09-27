@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import ARComponent from './ARComponent.vue';
+import ARComponent from './ReadComponent.vue';
 import { ref, onMounted, onUnmounted } from 'vue';
 import * as THREE from 'three';
 
