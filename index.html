@@ -30,7 +30,7 @@
     <div class="js-loader">
         <div>Loading, please wait...</div>
     </div>
-    
+
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
@@ -42,7 +42,7 @@
             <a-entity gltf-model="#model" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
-        <a-entity camera></a-entity>
+        <a-entity camera="fov: 80" position="0 0 0"></a-entity>
     </a-scene>
 
     <script>
