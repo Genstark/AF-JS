@@ -4,11 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Image based demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image base demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/3.0.0/aframe/build/aframe-ar-nft.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.7/aframe/build/aframe-ar.min.js"></script>
 
     <style>
         .js-loader {
@@ -31,19 +30,16 @@
     <div class="js-loader">
         <div>Loading, please wait...</div>
     </div>
-
+    
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
 
         <a-assets>
-            <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
-            <a-asset-item id="model-2" src="./image/model-2/untitled.gltf"></a-asset-item>
-            <a-asset-item id="ball" src="./image/fireball-energy-sphere/scene.gltf"></a-asset-item>
-            <a-asset-item id="running" src="./image/model-1.glb"></a-asset-item>
+            <a-asset-item id="model" src="./image/model-1/untitled.gltf"></a-asset-item>
         </a-assets>
 
-        <a-marker preset="hiro" smooth="true">
-            <a-entity gltf-model="#model-1" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0" animation-mixer></a-entity>
+        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
+            <a-entity gltf-model="#model" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
         <a-entity camera></a-entity>
@@ -53,13 +49,6 @@
         document.querySelector('a-scene').addEventListener('DOMContentLoaded', function () {
             document.querySelector('.js-loader').style.display = 'none';
         });
-        let box1 = document.getElementById('box-1');
-        function rotation() {
-            box1.object3D.rotation.x += 0.1;
-            box1.object3D.rotation.y += 0.1;
-            // box1.object3D.rotation.z += 0.1;
-        }
-        // setInterval(rotation, 100);
     </script>
 </body>
 
