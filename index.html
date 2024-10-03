@@ -38,6 +38,7 @@
             <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
             <a-asset-item id="model-2" src="./image/model-1.glb"></a-asset-item>
             <a-asset-item id="image" src="./image/pencil.png"></a-asset-item>
+            <a-asset-item id="mag" src="./image/magnemite/scene.gltf"></a-asset-item>
         </a-assets>
 
         <a-marker preset="hiro" smooth="true">
@@ -45,7 +46,11 @@
         </a-marker>
 
         <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
-            <a-entity gltf-model="#model-1" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1" animation-mixer></a-entity>
+            <a-entity gltf-model="#model-1" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
+        </a-marker>
+
+        <a-marker type="pattern" url="./image/pattern-magnemite.patt" smooth="true"></a-marker>
+        <a-entity gltf-model="#mag" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
         <a-marker type="pattern" url="./image/pattern-pencil.patt">
@@ -56,9 +61,10 @@
     </a-scene>
 
     <script>
-        document.querySelector('a-scene').addEventListener('DOMContentLoaded', function () {
+        document.querySelector('a-scene').addEventListener('loaded', function () {
             document.querySelector('.js-loader').style.display = 'none';
         });
+
     </script>
 </body>
 
