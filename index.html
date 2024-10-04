@@ -37,7 +37,6 @@
         <a-assets>
             <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
             <a-asset-item id="model-2" src="./image/model-1.glb"></a-asset-item>
-            <a-asset-item id="image" src="./image/pencil.png"></a-asset-item>
             <a-asset-item id="mag" src="./image/magnemite/scene.gltf"></a-asset-item>
         </a-assets>
 
@@ -49,12 +48,8 @@
             <a-entity gltf-model="#model-1" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
-        <a-marker type="pattern" url="./image/pattern-magnemite.patt" smooth="true"></a-marker>
+        <a-marker type="pattern" url="./image/pattern-magnemite.patt" smooth="true">
             <a-entity gltf-model="#mag" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
-        </a-marker>
-
-        <a-marker type="pattern" url="./image/pattern-pencil.patt">
-            <a-image src="#image" width="13" height="13"></a-image>
         </a-marker>
 
         <a-entity camera></a-entity>
