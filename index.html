@@ -4,8 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
-    <title>Image base demo</title>
+    <title>Image-based AR Demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.7/aframe/build/aframe-ar.min.js"></script>
 
@@ -21,7 +20,8 @@
             color: #fff;
             padding: 10px;
             border-radius: 5px;
-            display: none;
+            display: block;
+            /* Show loader until models load */
         }
     </style>
 </head>
@@ -32,39 +32,24 @@
     </div>
 
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
-        arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
         <a-assets>
-            <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
-            <a-asset-item id="model-2" src="./image/model-1.glb"></a-asset-item>
-            <a-asset-item id="image" src="./image/pencil.png"></a-asset-item>
-            <a-asset-item id="mag" src="./image/magnemite/scene.gltf"></a-asset-item>
+            <a-asset id="model" src="./image/model-1/untitled.gltf"></a-asset>
         </a-assets>
 
         <a-marker preset="hiro" smooth="true">
-            <a-entity gltf-model="#model-2" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
+            <a-entity gltf-model="#model" rotation="0 0 0" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
         </a-marker>
-
-        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
-            <a-entity gltf-model="#model-1" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
-        </a-marker>
-
-        <a-marker type="pattern" url="./image/pattern-magnemite.patt" smooth="true"></a-marker>
-            <a-entity gltf-model="#mag" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
-        </a-marker>
-
-        <a-marker type="pattern" url="./image/pattern-pencil.patt">
-            <a-image src="#image" width="13" height="13"></a-image>
-        </a-marker>
-
+        <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
+        // Hide the loader once the model has been fully loaded
         document.querySelector('a-scene').addEventListener('loaded', function () {
             document.querySelector('.js-loader').style.display = 'none';
         });
-
     </script>
 </body>
 
