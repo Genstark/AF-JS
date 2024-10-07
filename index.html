@@ -7,6 +7,7 @@
     <title>Image-based AR Demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.7/aframe/build/aframe-ar.min.js"></script>
+    <!-- <script src="'https://cdn.socket.io/socket.io-1.4.5.js'"></script> -->
 
     <style>
         .js-loader {
@@ -40,12 +41,12 @@
             <a-asset-item id="mag" src="./image/magnemite/scene.gltf"></a-asset-item>
         </a-assets>
 
-        <a-marker preset="hiro" smooth="true">
-            <a-entity gltf-model="#model" rotation="0 0 0" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
+        <a-marker preset="hiro" smooth="true" id="marker1" markerhandler>
+            <a-entity gltf-model="#model-1" rotation="0 0 0" scale="0.1 0.1 0.1" position="0 0 0" id="markermodel"></a-entity>
         </a-marker>
 
-        <a-marker type="pattern" url="./image/pattern-desk.patt" smooth="true">
-            <a-entity gltf-model="#model-1" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
+        <a-marker preset="custom" type="pattern" url="./image/pattern-desk.patt" smooth="true">
+            <a-entity gltf-model="#model-2" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
         <a-marker type="pattern" url="./image/pattern-magnemite.patt" smooth="true">
