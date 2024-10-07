@@ -1,24 +1,17 @@
-const marker1 = document.getElementById('markercube');
-const model1 = document.getElementById('model-11');
-let ismodel1 = false;
+AFRAME.registerComponent('markerhandler', {
 
-marker1.addEventListener('markerFound', () => {
-    ismodel1 = true;
-    setInterval(moving(ismodel1), 100);
-});
+    init: function () {
+        const animatedMarker = document.querySelector("#marker1");
+        const aEntity = document.querySelector("#markermodel");
 
-function moving(box){
-    if(box){
-        model1.ariaOrientation.x += 0.1;
+        // every click, we make our model grow in size :)
+        animatedMarker.addEventListener('click', function (ev, target) {
+            const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+            if (aEntity && intersectedElement === aEntity) {
+                const scale = aEntity.getAttribute('scale');
+                Object.keys(scale).forEach((key) => scale[key] = scale[key] + 1);
+                aEntity.setAttribute('scale', scale);
+            }
+        });
     }
-    else{
-        model1.ariaOrientation.x = 0;
-    }
-}
-
-marker1.addEventListener('markerLost', () => {
-    ismodel1 = false;
-    clearInterval(moving(ismodel1));
-    marker1.removeEventListener('markerFound', moving);
-    marker1.removeEventListener('markerLost', moving);
 });
