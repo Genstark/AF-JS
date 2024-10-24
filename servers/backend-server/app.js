@@ -19,14 +19,24 @@ let connections = [];
 
 io.on('connection', (socket) => {
     console.log('A user connected', socket.id);
+    connections.push(socket.id);
+    console.table(connections);
 
     socket.on('message', (msg) => {
-        console.log('Message received: ' + msg);
-        io.emit('message', msg);
+        console.log('Message received: ', msg);
+        io.emit('message', JSON.stringify({ message: Math.floor(Math.random() * 10000000) }));
+    });
+
+    socket.on('reply', (data) => {
+        console.log('flask data:', data);
+        io.emit('reply', JSON.stringify({ message: Math.floor(Math.random() * 10000000) }));
     });
 
     socket.on('disconnect', () => {
-        console.log('User disconnected',socket.id);
+        console.log('User disconnected', socket.id);
+        const findindex = connections.findIndex((conn) => conn.id === socket.id);
+        connections.splice(findindex, 1);
+        console.table(connections);
     });
 });
 

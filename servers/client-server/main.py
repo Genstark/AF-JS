@@ -1,39 +1,48 @@
-# client.py
 import socketio
+import time
+import random
 
-# Create a Socket.IO client
 sio = socketio.Client()
 
-# Event handler for successful connection
 @sio.event
 def connect():
-    print('Connected to server',  sio.sid)
+    print('Connected to server:', sio.sid)
 
-
-# Event handler for incoming messages
 @sio.event
 def message(data):
     print('Message from server:', data)
 
-# Event handler for disconnection
+@sio.event
+def reply(data):
+    print('reply from server:', data)
+
 @sio.event
 def disconnect():
     print('Disconnected from server')
 
-# Connect to the Express Socket.IO server
-sio.connect('http://localhost:3000')
+def connect_to_server():
+    sio.connect('http://localhost:3000')
 
-try:
-    while True:
-        # Read input from the user
-        msg = input("Enter a message to send (or 'exit' to quit): ")
-        if msg.lower() == 'exit':
-            break
-        # Emit the message to the server
-        sio.send(msg)
+check = 'y'
 
-except KeyboardInterrupt:
-    print("Exiting...")
-
-# Disconnect when done
-sio.disconnect()
+if __name__ == '__main__':
+    try:
+        connect_to_server()
+        while True:
+            object = {'message': random.randint(1000, 10000000)}
+            
+            time.sleep(2)
+            
+            if check == 'n':
+                sio.emit('message', object)
+                check = 'y'
+            elif check == 'y':
+                sio.emit('reply', {'message': random.randint(1000, 10000000)})
+                check = 'n'
+            else:
+                pass
+    except KeyboardInterrupt:
+        print("Exiting...")
+    finally:
+        # Disconnect from the Express server when done
+        sio.disconnect()
