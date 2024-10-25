@@ -13,6 +13,10 @@ socket.on('message', (data) => {
     console.log('Message from server:', data);
 });
 
+socket.on('replyback', (data) => {
+    console.log('data:', data);
+});
+
 // Event handler for disconnection
 socket.on('disconnect', () => {
     console.log('Disconnected from server');

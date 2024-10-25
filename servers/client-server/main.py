@@ -23,7 +23,7 @@ def disconnect():
 def connect_to_server():
     sio.connect('http://localhost:3000')
 
-check = 'y'
+check = ''
 
 if __name__ == '__main__':
     try:
@@ -35,10 +35,10 @@ if __name__ == '__main__':
             
             if check == 'n':
                 sio.emit('message', object)
-                check = 'y'
+                # check = 'y'
             elif check == 'y':
                 sio.emit('reply', {'message': random.randint(1000, 10000000)})
-                check = 'n'
+                check = 'q'
             else:
                 pass
     except KeyboardInterrupt:

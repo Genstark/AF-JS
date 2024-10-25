@@ -1,0 +1,30 @@
+{
+	"entryFile": "./src/index.ts",
+	"noImplicitAdditionalProperties": "throw-on-extras",
+	"controllerPathGlobs": [
+		"src/**/*Controller.ts"
+	],
+	"spec": {
+		"securityDefinitions": {
+			"userAuth": {
+				"type": "apiKey",
+				"name": "authentication",
+				"in": "header"
+			},
+			"adminAuth": {
+				"type": "apiKey",
+				"name": "authentication",
+				"in": "header"
+			}
+		},
+		"outputDirectory": "./src/generated",
+		"basePath": "/API",
+		"specVersion": 3
+	},
+	"routes": {
+		"basePath": "/API",
+		"authenticationModule": "./src/security/authentication.ts",
+		"middlewareTemplate" : "src/routers/routes.template.hbs",
+		"routesDir": "./src/generated"
+	}
+}

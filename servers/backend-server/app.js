@@ -2,6 +2,7 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
+const request = require('request');
 
 const app = express();
 const server = http.createServer(app);
@@ -28,8 +29,13 @@ io.on('connection', (socket) => {
     });
 
     socket.on('reply', (data) => {
-        console.log('flask data:', data);
+        console.log('data:', data);
         io.emit('reply', JSON.stringify({ message: Math.floor(Math.random() * 10000000) }));
+    });
+
+    socket.on('replyback', (data) => {
+        console.log('data:', data);
+        io.to(connections[0]).emit('replyback', JSON.stringify({ message: Math.floor(Math.random() * 10000000) }));
     });
 
     socket.on('disconnect', () => {
