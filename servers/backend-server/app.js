@@ -2,7 +2,6 @@
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
-const request = require('request');
 
 const app = express();
 const server = http.createServer(app);
@@ -20,8 +19,17 @@ let connections = [];
 
 io.on('connection', (socket) => {
     console.log('A user connected', socket.id);
-    connections.push(socket.id);
+    // connections.push(socket.id);
     console.table(connections);
+
+    socket.on('user_info', (data) => {
+        const userObject = {
+            email: data.email,
+            socketId: socket.id,
+        };
+        connections.push(userObject);
+        console.log('Connected users:', connections);
+    });
 
     socket.on('message', (msg) => {
         console.log('Message received: ', msg);

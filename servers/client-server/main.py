@@ -4,9 +4,15 @@ import random
 
 sio = socketio.Client()
 
+coneections = []
+
 @sio.event
 def connect():
     print('Connected to server:', sio.sid)
+    user_info = {
+        'email': 'email@example.com'
+    }
+    sio.emit('user_info', user_info)
 
 @sio.event
 def message(data):
