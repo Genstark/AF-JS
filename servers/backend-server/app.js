@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
             socketId: socket.id,
         };
         connections.push(userObject);
-        console.log('Connected users:', connections);
+        console.table(connections);
     });
 
     socket.on('message', (msg) => {
