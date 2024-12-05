@@ -7,7 +7,6 @@
     <title>Image-based AR Demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.7/aframe/build/aframe-ar.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
     <!-- <script src="'https://cdn.socket.io/socket.io-1.4.5.js'"></script> -->
 
     <style>
@@ -59,10 +58,6 @@
         <a-marker type="pattern" url="./image/pattern-pencil.patt" smooth="true" id="marker4">
             <a-entity gltf-model="#fireball" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1" id="fire"></a-entity>
         </a-marker>
-
-        <a-nft type="nft" url="./image/desk" smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
-            <a-entity gltf-model="#mag" scale="0.1 0.1 0.1" position="0 0 0" rotation="0 0 0"></a-entity>
-        </a-nft>
 
         <a-entity camera></a-entity>
     </a-scene>
