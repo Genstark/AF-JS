@@ -15,3 +15,11 @@ AFRAME.registerComponent('markerhandler', {
         });
     }
 });
+
+const marker1 = document.getElementById('animated-marker');
+marker1.addEventListener('markerFound', () => {
+    console.log('Marker found');
+});
+marker1.removeEventListener('markerLost', () => {
+    console.log('Marker lost');
+});

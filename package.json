@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "fasti": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.0",
+    "fastify": "^5.0.0",
     "http": "^0.0.1-security",
     "nodemon": "^3.1.7",
     "socket.io": "^4.8.0"
