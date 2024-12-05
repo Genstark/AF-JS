@@ -78,6 +78,10 @@
             }, 100);
         });
 
+        document.getElementById('marker1').addEventListener('markerLost', () => {
+            console.log('model is lost');
+        });
+
         document.getElementById('marker4').addEventListener('markerFound', () => {
             console.log('model is found');
             const marker_1 = document.getElementById('fire');
