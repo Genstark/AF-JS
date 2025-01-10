@@ -12,6 +12,12 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
+app.get('/mag', (req, res) => {
+    // console.log('mag req');
+    res.status(200).sendFile(path.resolve(__dirname, 'model-1.glb'));
+});
+
+
 app.listen(1000, () => {
     console.log(`Server is running on http://localhost:${1000}`);
 });
