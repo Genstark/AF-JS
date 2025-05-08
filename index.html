@@ -23,12 +23,11 @@
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
         <a-assets>
-            <a-asset-item id="apple-obj" src="https://models-ar-69.s3.eu-north-1.amazonaws.com/im.gltf"></a-asset-item>
+            <a-asset-item id="im" src="./image/IronMan/im.gltf"></a-asset-item>
         </a-assets>
         <!-- Marker (Hiro) -->
         <a-marker preset="hiro" smooth="true">
-            <a-entity id="markermodel" gltf-model="#apple-obj" rotation="0 0 0" scale="0.1 0.1 0.1"
-                position="0 0 0"></a-entity>
+            <a-entity id="markermodel" gltf-model="#im" rotation="0 0 0" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
         </a-marker>
 
         <!-- Camera -->
