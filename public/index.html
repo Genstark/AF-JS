@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image-based AR Demo</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.7/aframe/build/aframe-ar.min.js"></script>
-    <!-- <script src="'https://cdn.socket.io/socket.io-1.4.5.js'"></script> -->
 
     <style>
+        /* Loader styling */
         .js-loader {
             height: 100%;
             width: 100%;
@@ -22,74 +23,108 @@
             padding: 10px;
             border-radius: 5px;
             display: block;
-            /* Show loader until models load */
+            text-align: center;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
 
 <body style="margin: 0; overflow: hidden;">
+    <!-- Loader -->
     <div class="js-loader">
         <div>Loading, please wait...</div>
     </div>
 
-    <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true;" embedded
-        arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+    <!-- AR Scene -->
+    <a-scene embedded vr-mode-ui="enabled: false" renderer="logarithmicDepthBuffer: true"
+        arjs="sourceType: webcam; trackingMethod: best; debugUIEnabled: false;">
 
+        <!-- Assets -->
         <a-assets>
-            <a-asset-item id="model-1" src="./image/model-1/untitled.gltf"></a-asset-item>
-            <a-asset-item id="model-2" src="./model-1.glb"></a-asset-item>
-            <a-asset-item id="mag" src="./image/magnemite/scene.gltf"></a-asset-item>
-            <a-asset-item id="fireball" src="./image/fireball-energy-sphere/scene.gltf"></a-asset-item>
+            <a-asset-item id="model-2" src="../image/model-1/untitled.bin"></a-asset-item>
+            <a-asset-item id="mag" src="../image/magnemite/scene.bin"></a-asset-item>
+            <a-asset-item id="fireball" src="../image/fireball-energy-sphere/scene.bin"></a-asset-item>
         </a-assets>
 
-        <a-marker preset="hiro" smooth="true" id="marker1" markerhandler>
-            <a-entity gltf-model="#model-1" rotation="0 0 0" scale="0.1 0.1 0.1" position="0 0 0" id="markermodel"></a-entity>
+        <!-- Marker 1: Hiro Marker -->
+        <a-marker preset="hiro" smooth="true" id="marker1">
+            <a-entity id="markermodel" gltf-model="#model-2" rotation="0 0 0" scale="0.1 0.1 0.1"
+                position="0 0 0"></a-entity>
         </a-marker>
 
-        <a-marker preset="custom" type="pattern" url="./image/pattern-desk.patt" smooth="true">
+        <!-- Marker 2: Custom pattern -->
+        <a-marker preset="custom" type="pattern" url="../image/pattern-desk.patt" smooth="true" id="marker2">
             <a-entity gltf-model="#model-2" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
-        <a-marker type="pattern" url="./image/pattern-magnemite.patt" smooth="true">
+        <!-- Marker 3: Magnemite -->
+        <a-marker type="pattern" url="../image/pattern-magnemite.patt" smooth="true" id="marker3">
             <a-entity gltf-model="#mag" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
-        <a-marker type="pattern" url="./image/pattern-pencil.patt" smooth="true" id="marker4">
-            <a-entity gltf-model="#fireball" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1" id="fire"></a-entity>
+        <!-- Marker 4: Fireball -->
+        <a-marker type="pattern" url="../image/pattern-pencil.patt" smooth="true" id="marker4">
+            <a-entity id="fire" gltf-model="#fireball" rotation="0 0 0" position="0 0 0" scale="0.1 0.1 0.1"></a-entity>
         </a-marker>
 
+        <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
 
     <script>
-        // Hide the loader once the model has been fully loaded
-        // changes af program in mobile not working
-        document.querySelector('a-scene').addEventListener('loaded', function () {
-            document.querySelector('.js-loader').style.display = 'none';
+        // Loader overlay
+        const loaderOverlay = document.querySelector('.js-loader');
+        const modelToWatch = document.getElementById('markermodel');
+
+        // Hide loader when the model is loaded
+        modelToWatch.addEventListener('model-loaded', () => {
+            console.log('Model loaded successfully');
+            loaderOverlay.style.display = 'none';
         });
 
+        // Log errors if the model fails to load
+        modelToWatch.addEventListener('error', (e) => {
+            console.error('Model failed to load:', e);
+        });
+
+        // Rotation intervals
+        let rotateInterval1 = null;
+        let rotateInterval4 = null;
+
+        // Rotation on marker1 (hiro)
         document.getElementById('marker1').addEventListener('markerFound', () => {
-            console.log('model is found');
-            const marker_1 = document.getElementById('markermodel');
-            let currentRotation = marker_1.getAttribute('rotation');
-            setInterval(() => {
-                currentRotation.y += 1;  // increment the Y rotation by 1 degree each frame
-                marker_1.setAttribute('rotation', currentRotation);
+            const markerModel = document.getElementById('markermodel');
+            if (rotateInterval1) clearInterval(rotateInterval1);
+            rotateInterval1 = setInterval(() => {
+                let rotation = markerModel.getAttribute('rotation');
+                markerModel.setAttribute('rotation', {
+                    x: rotation.x,
+                    y: rotation.y + 1,
+                    z: rotation.z
+                });
             }, 100);
         });
 
         document.getElementById('marker1').addEventListener('markerLost', () => {
-            console.log('model is lost');
+            if (rotateInterval1) clearInterval(rotateInterval1);
         });
 
+        // Rotation on marker4 (fireball)
         document.getElementById('marker4').addEventListener('markerFound', () => {
-            console.log('model is found');
-            const marker_1 = document.getElementById('fire');
-            let currentRotation = marker_1.getAttribute('rotation');
-            setInterval(() => {
-                currentRotation.y += 1;  // increment the Y rotation by 1 degree each frame
-                marker_1.setAttribute('rotation', currentRotation);
+            const fireballModel = document.getElementById('fire');
+            if (rotateInterval4) clearInterval(rotateInterval4);
+            rotateInterval4 = setInterval(() => {
+                let rotation = fireballModel.getAttribute('rotation');
+                fireballModel.setAttribute('rotation', {
+                    x: rotation.x,
+                    y: rotation.y + 1,
+                    z: rotation.z
+                });
             }, 100);
+        });
+
+        document.getElementById('marker4').addEventListener('markerLost', () => {
+            if (rotateInterval4) clearInterval(rotateInterval4);
         });
     </script>
 </body>
