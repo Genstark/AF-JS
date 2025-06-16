@@ -22,12 +22,13 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
-        <a-assets>
+        <!-- <a-assets>
             <a-asset-item id="im" src="./image/IronMan/im.gltf"></a-asset-item>
-        </a-assets>
-        <!-- Marker (Hiro) -->
+        </a-assets> -->
+        
         <a-marker preset="hiro" smooth="true">
-            <a-entity id="markermodel" gltf-model="#im" rotation="0 0 0" scale="0.1 0.1 0.1" position="0 0 0"></a-entity>
+            <a-box position="0 0 0" depth="0.1" height="0.1" width="0.1" color="blue">
+            </a-box>
         </a-marker>
 
         <!-- Camera -->
