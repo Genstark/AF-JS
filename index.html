@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Basic A-Frame AR</title>
     <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.2.1/aframe/build/aframe-ar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -22,16 +22,10 @@
     <a-scene vr-mode-ui="enabled: false;" renderer="logarithmicDepthBuffer: true; precision: medium;" embedded
         arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
 
-        <!-- <a-assets>
-            <a-asset-item id="im" src="./image/IronMan/im.gltf"></a-asset-item>
-        </a-assets> -->
-        
         <a-marker preset="hiro" smooth="true">
-            <a-box position="0 0 0" depth="0.1" height="0.1" width="0.1" color="blue">
-            </a-box>
+            <a-box position="0 0 0" depth="0.1" height="0.3" width="0.3" color="blue"></a-box>
         </a-marker>
 
-        <!-- Camera -->
         <a-entity camera></a-entity>
     </a-scene>
 </body>
